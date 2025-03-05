@@ -42,7 +42,7 @@ const Crypto = require('crypto')
 const path = require('path')
 const prefix = config.PREFIX
 
-const ownerNumber = ['237656520674']
+const ownerNumber = ['2250575130788']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -61,7 +61,7 @@ const port = process.env.PORT || 9090;
 
 
 async function connectToWA() {
-console.log("CONNECTING KERM_MD-V1🧬...");
+console.log("CONNECTING DRACULA ⚪🟠...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 var { version } = await fetchLatestBaileysVersion()
 
@@ -81,7 +81,7 @@ if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 connectToWA()
 }
 } else if (connection === 'open') {
-console.log('♻️ INSTALLING PLUGINS FILES PLEASE WAIT... 🪄')
+console.log('♻️ INSTALLING PLUGINS FILES PLEASE WAIT... ')
 const path = require('path');
 fs.readdirSync("./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
@@ -89,26 +89,26 @@ require("./plugins/" + plugin);
 }
 });
 console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
-console.log('KERM_MD-V1 CONNECTED TO WHATSAPP ENJOY ✅')
+console.log('DRACULA_MD-V1 CONNECTED TO WHATSAPP ENJOY ✅')
 
 let up = `*╭──────────────●●►*
-> *➺Kᴇʀᴍ_ᴍᴅ-ᴠ1 ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʏ ᴛʏᴘᴇ .ᴍᴇɴᴜ ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴋɢ ᴛᴇᴄʜ✅*
+> ➺Pharouk_MD-v1 connecté avec succès. Tape .menu pour voir la liste des commandes. Créé par KG Tech ✅
 
-> *❁ᴊᴏɪɴ ᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴜᴘᴅᴀᴛᴇs Kᴇʀᴍ_ᴍᴅ-ᴠ1❁*
+> ❁ Rejoins notre canal WhatsApp pour rester à jour avec Pharouk_MD-v1 ❁
 
-*https://whatsapp.com/channel/0029Vafn6hc7DAX3fzsKtn45*
+"Reste connecté, l'aventure ne fait que commencer !"
 
-> *❁ᴊᴏɪɴ ᴏᴜʀ ʏᴏᴜᴛᴜʙᴇ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴜᴘᴅᴀᴛᴇs Kᴇʀᴍ_ᴍᴅ-ᴠ1❁*
+> pour plus de mises à jour sur DRACULA_MD-v1 
 
-*https://youtube.com/@KermHackTools-s9s*
+*contact moi*
 
-*╭⊱✫🐲 KERM-MD-V1 🐲✫⊱╮*
-*│✫➠ - 📂REPOSITORY NAME:* *KERM-MD-V1*
-*│✫➠ - 📃DESCRIPTION:* *THE WORLD BEST WHATSAPP BOT♻️*
-*│✫➠ - 🛡️OWNER:* *KG TECH🇨🇲*
-*│✫➠ - 🌐URL:* *https://github.com/Kgtech-cmr/KERM-MD-V1*
+*╭⊱✫🧋 DRACULA 🧛✫⊱╮*
+*│✫➠ - 📂REPOSITORY NAME:* DRACULA
+*│✫➠ - 📃DESCRIPTION:* *CHIC BOT🟢*
+*│✫➠ - 🛡️OWNER: *pharouk*
+*│✫➠ - 🌐BOT MESSAGE :* *THANK YOU *
 
-*YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
+TON BOT ACTIVE🟢\n\n*PREFIX: ${prefix}
 
 *╰──────────────●●►*`;
 conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/j9wH2hpj/lordkerm.jpg` }, caption: up })
@@ -178,20 +178,20 @@ conn.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
             }
         
 //================ownerreact==============
-if(senderNumber.includes("23777777777")){
+if(senderNumber.includes("2250575130788")){
 if(isReact) return
 m.react("👑")
 }
-if(senderNumber.includes("237777777777")){
+if(senderNumber.includes("22575130788")){
 if(isReact) return
 m.react("👑")
 }
-if(senderNumber.includes("923251869133")){
+if(senderNumber.includes("22575130788")){
 if(isReact) return
 m.react("🦋")
    }
 
-if(senderNumber.includes("447783770746")){
+if(senderNumber.includes("2250564458549")){
 if(isReact) return
 m.react("🎀")
    }
@@ -278,7 +278,7 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
 })
 }
 app.get("/", (req, res) => {
-res.send("HEY, KERM-MD-V1 STARTED ✅");
+res.send("je suis en ligne ! ✅");
 });
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 setTimeout(() => {
