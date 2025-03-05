@@ -1,16 +1,3 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const fs = require('fs');
 const path = require('path');
 const config = require('../config');
@@ -19,7 +6,7 @@ const { cmd, commands } = require('../command');
 cmd({
   pattern: "updatecmd",
   react: "🧞",
-  desc: "Update commands.",
+  desc: "Met à jour les commandes.",
   category: "owner",
   filename: __filename
 },
@@ -48,7 +35,7 @@ async (conn, mek, m, {
   reply
 }) => {
   try {
-    if (!isOwner) return reply("Only bot owners can use this command.");
+    if (!isOwner) return reply("Seul le propriétaire du bot peut utiliser cette commande.");
     
     const pluginsDir = path.join(__dirname, '../plugins');
     const files = fs.readdirSync(pluginsDir);
@@ -57,13 +44,13 @@ async (conn, mek, m, {
       if (file.endsWith('.js')) {
         const filePath = path.join(pluginsDir, file);
         require(filePath);
-        console.log(`Loaded ${file}`);
+        console.log(`Chargé ${file}`);
       }
     }
     
-    reply("Commands updated successfully.");
+    reply("Commandes mises à jour avec succès.");
   } catch (e) {
     console.log(e);
-    reply(`Error updating commands: ${e.message}`);
+    reply(`Erreur lors de la mise à jour des commandes : ${e.message}`);
   }
 });
