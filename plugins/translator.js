@@ -1,34 +1,20 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const axios = require('axios');
 const config = require('../config')
-const {cmd , commands} = require('../command')
+const { cmd, commands } = require('../command')
 const googleTTS = require('google-tts-api')
-
 
 cmd({
     pattern: "trt",
     alias: ["translate"],
-    desc: "🌍 Translate text between languages",
-    react: "⚡",
+    desc: "Traduire un texte entre différentes langues",
+    react: "🌐",
     category: "other",
     filename: __filename
 },
 async (conn, mek, m, { from, q, reply }) => {
     try {
         const args = q.split(' ');
-        if (args.length < 2) return reply("❗ Please provide a language code and text. Usage: .translate [language code] [text]\nEg: trt fr Hello");
+        if (args.length < 2) return reply(" Veuillez fournir un code de langue et le texte. Utilisation : .translate [code langue] [texte]\nEx : trt fr Bonjour");
 
         const targetLang = args[0];
         const textToTranslate = args.slice(1).join(' ');
@@ -39,27 +25,26 @@ async (conn, mek, m, { from, q, reply }) => {
         const translation = response.data.responseData.translatedText;
 
         const translationMessage = `
-🌍 *KERM-MD-V1 TRANSLATION* 🌍
+  DRACULA TRADUCTION
 
-🔤 *Original*: ${textToTranslate}
+Original : ${textToTranslate}
 
-🔠 *Translated*: ${translation}
+Traduit : ${translation}
 
-🌐 *Language*: ${targetLang.toUpperCase()}
-
-*KERM_MD-V4 CREATION*`;
+🌐 Langue : ${targetLang.toUpperCase()}
+`;
 
         return reply(translationMessage);
     } catch (e) {
         console.log(e);
-        return reply("⚠️ An error occurred data while translating the your text. Please try again later🤕");
+        return reply("⚠️ Une erreur s'est produite lors de la traduction de votre texte. Veuillez réessayer plus tard 🤕");
     }
 });
 
 //____________________________TTS___________________________
 cmd({
     pattern: "tts",
-    desc: "Convert text to speech in specified language",
+    desc: "Convertir un texte en parole dans la langue spécifiée",
     category: "other",
     react: "👧",
     filename: __filename
@@ -68,7 +53,7 @@ async (conn, mek, m, { from, quoted, q, reply }) => {
     try {
         const args = q.split(' ');
         if (args.length < 2) {
-            return reply("❗ Please provide a language code and text. Usage: .tts [language code] [text]\nEg: .tts en Hello");
+            return reply("❗ Veuillez fournir un code de langue et le texte. Utilisation : .tts [code langue] [texte]\nEx : .tts en Bonjour");
         }
 
         const lang = args[0];
@@ -83,6 +68,6 @@ async (conn, mek, m, { from, quoted, q, reply }) => {
         await conn.sendMessage(from, { audio: { url: url }, mimetype: 'audio/mpeg', ptt: true }, { quoted: mek });
     } catch (e) {
         console.log(e);
-        return reply("⚠️ An error occurred while converting your text to speech. Please try again later🤕");
+        return reply("⚠️ Une erreur s'est produite lors de la conversion de votre texte en parole. Veuillez réessayer plus tard ");
     }
 });
