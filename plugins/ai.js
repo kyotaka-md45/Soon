@@ -1,41 +1,28 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const axios = require("axios");
 const { cmd } = require("../command");
 
 cmd({
     pattern: "gpt",
     alias: "ai",
-    desc: "Interact with ChatGPT using the Dreaded API.",
+    desc: "Interagir avec ChatGPT en utilisant l'API redoutable.",
     category: "ai",
     react: "🤖",
-    use: "<your query>",
+    use: "<votre requête>",
     filename: __filename,
 }, async (conn, mek, m, { from, args, q, reply }) => {
     try {
         // Vérification de l'entrée utilisateur
-        if (!q) return reply("⚠️ Please provide a query for ChatGPT.\n\nExample:\n.gpt What is AI?");
-
+        if (!q) return reply("⚠️ Veuillez fournir une requête pour ChatGPT.\n\nExemple :\n.gpt Qu'est-ce que l'IA ?");
+        
         // Utilisation de `${text}` dans le endpoint API
         const text = q;  // Texte de la requête de l'utilisateur
         const encodedText = encodeURIComponent(text);  // S'assurer que le texte est encodé correctement
 
         const url = `https://api.dreaded.site/api/chatgpt?text=${encodedText}`;
 
-        console.log('Requesting URL:', url);  // Afficher l'URL pour vérifier
+        console.log('URL demandée :', url);  // Afficher l'URL pour vérification
 
-        // Appel à l'API avec headers personnalisés (ajoute des headers si nécessaire)
+        // Appel à l'API avec headers personnalisés (ajoutez des headers si nécessaire)
         const response = await axios.get(url, {
             headers: {
                 'User-Agent': 'Mozilla/5.0',  // Ajouter un User-Agent pour simuler une requête valide
@@ -43,120 +30,121 @@ cmd({
             }
         });
 
-        // Déboguer et afficher la réponse complète
-        console.log('Full API Response:', response.data);
+        // Afficher la réponse complète pour le débogage
+        console.log('Réponse complète de l\'API :', response.data);
 
         // Vérification de la structure de la réponse
         if (!response || !response.data || !response.data.result) {
-            return reply("❌ No response received from the GPT API. Please try again later.");
+            return reply(" Aucune réponse reçue de l'API GPT. Veuillez réessayer plus tard.");
         }
 
         // Extraire uniquement le texte de la réponse (le prompt)
         const gptResponse = response.data.result.prompt;
 
         if (!gptResponse) {
-            return reply("❌ The API returned an unexpected format. Please try again later.");
+            return reply(" Le format de réponse de l'API est inattendu. Veuillez réessayer plus tard.");
         }
 
-        // Image AI à envoyer
-        const ALIVE_IMG = 'https://i.imgur.com/R4ebueM.jpeg'; // Remplacez par l'URL de votre image AI
+        // Image à envoyer
+        const ALIVE_IMG = 'https://i.ibb.co/938481dt/lordkerm.jpg'; // Remplacez par l'URL de votre image
 
-        // Légende avec des informations formatées
-        const formattedInfo = `🤖 *ChatGPT Response:*\n\n${gptResponse}`;
+        // Légende avec les informations formatées
+        const formattedInfo = `🤖 *Réponse ChatGPT :*\n\n${gptResponse}`;
 
-        // Envoyer le message avec image et légende
+        // Envoyer le message avec l'image et la légende
         await conn.sendMessage(from, {
-            image: { url: ALIVE_IMG }, // Assurez-vous que l'URL est valide
+            image: { url: ALIVE_IMG }, // Vérifiez que l'URL est valide
             caption: formattedInfo,
             contextInfo: { 
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363321386877609@newsletter',
-                    newsletterName: '𝐊𝐄𝐑𝐌 𝐀𝐈',
+                    newsletterJid: '@newsletter',
+                    newsletterName: 'DRACULA',
                     serverMessageId: 143
                 }
             }
         }, { quoted: mek });
 
     } catch (error) {
-        console.error("Error in GPT command:", error);
+        console.error("Erreur dans la commande GPT :", error);
 
-        // Affichage du message d'erreur dans la console pour plus de détails
+        // Affichage des détails de l'erreur dans la console
         if (error.response) {
-            console.log("Error Response Data:", error.response.data);
+            console.log("Données de réponse d'erreur :", error.response.data);
         } else {
-            console.log("Error Details:", error.message);
+            console.log("Détails de l'erreur :", error.message);
         }
 
-        // Répondre avec des détails de l'erreur
+        // Répondre avec les détails de l'erreur
         const errorMessage = `
-❌ An error occurred while processing the GPT command.
-🛠 *Error Details*:
+❌ Une erreur est survenue lors du traitement de la commande GPT.
+🛠 *Détails de l'erreur* :
 ${error.message}
 
-Please report this issue or try again later.
+Veuillez signaler ce problème ou réessayer plus tard.
         `.trim();
         return reply(errorMessage);
     }
 });
+
 cmd({
     pattern: "llama3",
-    desc: "Get a response from Llama3 AI using the provided prompt.",
+    desc: "Obtenir une réponse de Llama3 AI à partir du prompt fourni.",
     category: "ai",
     react: "🤖",
     filename: __filename,
-    use: ".llama3 <your prompt>"
+    use: ".llama3 <votre prompt>"
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        // Check if a prompt is provided by the user
-        if (!q) return reply("⚠️ Please provide a prompt for Llama3 AI.");
+        // Vérifier qu'un prompt est fourni par l'utilisateur
+        if (!q) return reply("⚠️ Veuillez fournir un prompt pour Llama3 AI.");
 
-        // Inform the user that the request is being processed
-        await reply("> *Processing your prompt...*");
+        // Informer l'utilisateur que la requête est en cours de traitement
+        await reply("> *Traitement de votre prompt...*");
 
-        // API URL with encoded user prompt
+        // URL de l'API avec le prompt utilisateur encodé
         const apiUrl = `https://api.davidcyriltech.my.id/ai/llama3?text=${encodeURIComponent(q)}`;
 
-        // Send a GET request to the API
+        // Envoyer une requête GET à l'API
         const response = await axios.get(apiUrl);
-        console.log("Llama3 API Response:", response.data);
+        console.log("Réponse de l'API Llama3 :", response.data);
 
-        // Extract AI response
+        // Extraire la réponse de l'IA
         let llamaResponse;
         if (typeof response.data === "string") {
             llamaResponse = response.data.trim();
         } else if (typeof response.data === "object") {
             llamaResponse = response.data.response || response.data.result || JSON.stringify(response.data);
         } else {
-            llamaResponse = "Unable to process the AI response.";
+            llamaResponse = "Impossible de traiter la réponse de l'IA.";
         }
 
-        // AI image to attach
-        const AI_IMG = 'https://i.ibb.co/V09y0WJY/mrfrankofc.jpg'; // Replace with a valid image URL
+        // Image à joindre
+        const AI_IMG = 'https://i.ibb.co/V09y0WJY/mrfrankofc.jpg'; // Remplacez par une URL d'image valide
 
-        // Formatted response text
-        const formattedInfo = `🤖 *Llama3 Response:*\n\n${llamaResponse}`;
+        // Texte de la réponse formatée
+        const formattedInfo = `🤖 *Réponse Llama3 :*\n\n${llamaResponse}`;
 
-        // Send the response with an image
+        // Envoyer la réponse avec une image
         await conn.sendMessage(from, {
-            image: { url: AI_IMG }, // Ensure the URL is valid
+            image: { url: AI_IMG }, // Vérifiez que l'URL est valide
             caption: formattedInfo,
             contextInfo: { 
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363321386877609@newsletter',
-                    newsletterName: '𝐊𝐄𝐑𝐌 𝐀𝐈',
+                    newsletterJid: '@newsletter',
+                    newsletterName: 'DRACULA',
                     serverMessageId: 143
                 }
             }
         }, { quoted: mek });
 
     } catch (error) {
-        console.error("Error in llama3 command:", error);
-        return reply(`❌ An error occurred: ${error.message}`);
+        console.error("Erreur dans la commande llama3 :", error);
+        return reply(`❌ Une erreur est survenue : ${error.message}`);
     }
 });
