@@ -1,15 +1,4 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
 
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
 
 const {
 default: makeWASocket,
@@ -52,7 +41,7 @@ const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
 if(err) throw err
 fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-console.log("SESSION DOWNLOADED COMPLETED ✅")
+console.log("SESSION DOWNLOADED COMPLETED 🟢")
 })})}
 
 const express = require("express");
@@ -61,7 +50,7 @@ const port = process.env.PORT || 9090;
 
 
 async function connectToWA() {
-console.log("CONNECTING DRACULA ⚪🟠...");
+console.log("CONNECTER A DRACULA ⚪🟠...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 var { version } = await fetchLatestBaileysVersion()
 
@@ -81,7 +70,7 @@ if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 connectToWA()
 }
 } else if (connection === 'open') {
-console.log('♻️ INSTALLING PLUGINS FILES PLEASE WAIT... ')
+console.log('INSTALLING PLUGINS FILES PLEASE WAIT 🟠⚪🟢')
 const path = require('path');
 fs.readdirSync("./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
@@ -89,29 +78,29 @@ require("./plugins/" + plugin);
 }
 });
 console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
-console.log('DRACULA_MD-V1 CONNECTED TO WHATSAPP ENJOY ✅')
+console.log('DRACULA-V1 CONNECTED TO WHATSAPP ENJOY ✅')
 
-let up = `*╭──────────────●●►*
-> ➺Pharouk_MD-v1 connecté avec succès. Tape .menu pour voir la liste des commandes. Créé par KG Tech ✅
+let up = `╭──────────────●●►
+➺Pharouk_MD-v1 connecté avec succès. Tape .menu pour voir la liste des commandes. Créé par Pharouk ✅
 
-> ❁ Rejoins notre canal WhatsApp pour rester à jour avec Pharouk_MD-v1 ❁
+ Rejoins notre canal WhatsApp pour rester à jour avec DRACULA-v1 
 
-"Reste connecté, l'aventure ne fait que commencer !"
+Reste connecté, l'aventure ne fait que commencer !
 
-> pour plus de mises à jour sur DRACULA_MD-v1 
+ pour plus de mises à jour sur DRACULA_MD-v1 
 
-*contact moi*
+contact moi 
 
-*╭⊱✫🧋 DRACULA 🧛✫⊱╮*
-*│✫➠ - 📂REPOSITORY NAME:* DRACULA
-*│✫➠ - 📃DESCRIPTION:* *CHIC BOT🟢*
-*│✫➠ - 🛡️OWNER: *pharouk*
-*│✫➠ - 🌐BOT MESSAGE :* *THANK YOU *
+╭⊱✫🧛 DRACULA 🧛✫⊱╮
+│✫➠ - 📂REPOSITORY NAME:* DRACULA
+│✫➠ - 📃DESCRIPTION: CHIC BOT»🧋
+│✫➠ - 🛡️OWNER: PHAROUK 
+│✫➠ - 🌐BOT MESSAGE : THANK YOU 
 
 TON BOT ACTIVE🟢\n\n*PREFIX: ${prefix}
 
-*╰──────────────●●►*`;
-conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/j9wH2hpj/lordkerm.jpg` }, caption: up })
+╰──────────────●●►`;
+conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/938481dt/lordkerm.jpg` }, caption: up })
 
 }
 })
