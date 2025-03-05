@@ -1,115 +1,114 @@
 {
-  "name": "KERM-MD-V1",
-  "description": "ᴊᴀᴠᴀsᴄʀɪᴘᴛ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ ᴄʀᴇᴀᴛᴇᴅ ʙʏ Kɢ ᴛᴇᴄʜ",
-  "logo": "https://files.catbox.moe/yw2ty2.jpeg",
+  "name": "DRACULA",
+  "description": "Bot WHATSAPP",
+  "logo": "",
   "keywords": ["bot"],
   "success_url": "/",
 
-    "stack": "container",
+  "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Put the session-id here.",
+      "description": "Mettez l'identifiant de session ici.",
       "required": true,
       "value": ""
     },  
-    
+
     "ALIVE_IMG": {
-      "description": "paste your image url if you don't have you can use this public url.",
+      "description": "Collez l'URL de votre image. Si vous n'en avez pas, vous pouvez utiliser une URL publique.",
       "required": true,
-      "value": "https://files.catbox.moe/yw2ty2.jpeg"
+      "value": ""
     }, 
-    
+
     "ALIVE_MSG": {
-      "description": "paste your alive message hear.",
+      "description": "Collez votre message de statut en ligne.",
       "required": true,
-      "value": "_Hi bro am alive now🥷🏽🤝🏾._"
+      "value": "Je suis en ligne."
     },
-    
+
     "PREFIX": {
-      "description": "paste your bot prefix note! Don't apply null prefix.",
+      "description": "Collez le préfixe de votre bot ! Ne mettez pas de préfixe nul.",
       "required": true,
       "value": "."
     },
-    
+
     "MODE": {
-      "description": "select your bot work type public-private-inbox-group.",
+      "description": "Sélectionnez le mode de fonctionnement de votre bot : public, privé, inbox ou groupe.",
       "required": true,
       "value": "public"
     }, 
 
     "AUTO_VOICE": {
-      "description": "Make it true if you want bot auto voice.",
+      "description": "Mettez 'true' si vous voulez que le bot envoie automatiquement des messages vocaux.",
       "required": true,
       "value": "true"
     }, 
 
     "AUTO_REPLY": {
-      "description": "Make it true if you want bot auto reply.",
+      "description": "Mettez 'true' si vous voulez que le bot réponde automatiquement.",
       "required": true,
       "value": "true"
     }, 
 
     "AUTO_STICKER": {
-      "description": "Make it true if you want bot auto sticker.",
+      "description": "Mettez 'true' si vous voulez que le bot crée automatiquement des stickers.",
       "required": true,
       "value": "false"
     }, 
 
     "AUTO_READ_STATUS": {
-      "description": "Make it true if you want bot auto auto_read_status.",
+      "description": "Mettez 'true' si vous voulez que le bot lise automatiquement les statuts.",
       "required": true,
       "value": "true"
     }, 
 
     "ANTI_LINK": {
-      "description": "Make it true if you want bot auto remove group link.",
+      "description": "Mettez 'true' si vous voulez que le bot supprime automatiquement les liens de groupe.",
       "required": true,
       "value": "true"
     },
 
     "ANTI_BAD": {
-      "description": "Make it true if you want bot auto delete bad words from group example xxx porn etc.",
+      "description": "Mettez 'true' si vous voulez que le bot supprime automatiquement les mots interdits (exemple : contenu adulte, insultes, etc.).",
       "required": true,
       "value": "false"
     }, 
 
     "FAKE_RECORDING": {
-      "description": "Make it true if you want bot fake record.",
+      "description": "Mettez 'true' si vous voulez que le bot simule un enregistrement vocal.",
       "required": true,
       "value": "true"
     },
 
     "AUTO_REACT": {
-      "description": "Make it true if you want bot AutoReact.",
+      "description": "Mettez 'true' si vous voulez que le bot réagisse automatiquement aux messages.",
       "required": false,
       "value": "false"
     },
 
     "OWNER_REACT": {
-      "description": "Make it true if you want bot OwnerReact.",
+      "description": "Mettez 'true' si vous voulez que le bot réagisse uniquement aux messages du propriétaire.",
       "required": false,
       "value": "false"
-    
     }, 
 
     "BOT_NAME": {
-      "description": "write hear your name.",
+      "description": "Écrivez ici le nom de votre bot.",
       "required": true,
-      "value": "✦『𝗞𝗘𝗥𝗠 𝗠𝗗 𝗩1』✦"
+      "value": "DRACULA "
     }, 
 
     "HEART_REACT": {
-      "description": "Make it true if you want bot only heart ♥️ emjois reaction .",
+      "description": "Mettez 'true' si vous voulez que le bot réagisse uniquement avec l'emoji cœur ♥️.",
       "required": true,
       "value": "false"
     }
+  },
 
-},
-
-     "buildpacks": [
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
-        }
-     ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
+  
   "stack": "heroku-24"
 }
