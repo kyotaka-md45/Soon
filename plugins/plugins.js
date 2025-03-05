@@ -1,79 +1,79 @@
-const { cmd } = require('../command'); // Assuming you have a command handler
-const axios = require('axios'); // For making HTTP requests to GitHub API
-const fs = require('fs'); // For saving downloaded files
+const { cmd } = require('../command'); // Supposons que vous avez un gestionnaire de commandes
+const axios = require('axios'); // Pour effectuer des requêtes HTTP à l'API GitHub
+const fs = require('fs'); // Pour enregistrer les fichiers téléchargés
 
-// GitHub repository details
-const REPO_OWNER = 'kgtech-cmr';
-const REPO_NAME = 'KERM-MD-V1';
-const PLUGINS_FOLDER = 'plugins'; // Folder where plugins are stored
+// Détails du dépôt GitHub
+const REPO_OWNER = 'Pharouk';
+const REPO_NAME = 'DRACULA';
+const PLUGINS_FOLDER = 'plugins'; // Dossier où sont stockés les plugins
 
-// GitHub API base URL
+// URL de base de l'API GitHub
 const GITHUB_API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${PLUGINS_FOLDER}`;
 
-// Store the list of plugins temporarily
+// Stocker temporairement la liste des plugins
 let pluginListCache = [];
 
-// Command to list all plugins
+// Commande pour lister tous les plugins
 cmd({
-    pattern: "listplugins", // Command trigger
-    alias: ["pluginslist", "listplugs", "listplugin"], // Aliases
-    use: '.listplugins', // Example usage
-    react: "📂", // Emoji reaction
-    desc: "List all available plugins in the bot's repository.", // Description
-    category: "utility", // Command category
-    filename: __filename // Current file name
+    pattern: "listplugins", // Déclencheur de la commande
+    alias: ["pluginslist", "listplugs", "listplugin"], // Alias
+    use: '.listplugins', // Exemple d'utilisation
+    react: "📂", // Réaction emoji
+    desc: "Liste tous les plugins disponibles dans le dépôt du bot.", // Description
+    category: "utility", // Catégorie de la commande
+    filename: __filename // Nom du fichier actuel
 },
 
 async (conn, mek, m, { from, reply }) => {
     try {
-        // Fetch the folder structure from GitHub
+        // Récupérer la structure du dossier depuis GitHub
         const response = await axios.get(GITHUB_API_URL);
-        const plugins = response.data.filter(item => item.type === 'file'); // Only list files
+        const plugins = response.data.filter(item => item.type === 'file'); // Lister uniquement les fichiers
 
         if (plugins.length === 0) {
-            return reply("*No plugins found in the repository.*");
+            return reply("Aucun plugin trouvé dans le dépôt.");
         }
 
-        // Cache the plugin list for reply functionality
+        // Mettre en cache la liste des plugins pour une utilisation ultérieure
         pluginListCache = plugins;
 
-        // Construct a list of plugins
-        let pluginList = "📂 *KERM MD V1 Plugins:*\n\n";
+        // Construire une liste des plugins
+        let pluginList = " DRACULA v1 Plugins:*\n\n";
         plugins.forEach((plugin, index) => {
-            pluginList += `${index + 1}. ${plugin.name}\n> `; // Add plugin name to the list
+            pluginList += `${index + 1}. ${plugin.name}\n> `; // Ajouter le nom du plugin à la liste
         });
 
-        // Add instructions for downloading
-        pluginList += "\n*Reply with the file number or file name to download.*";
+        // Ajouter des instructions pour le téléchargement
+        pluginList += "\nRépondez avec le numéro du fichier ou le nom du fichier pour télécharger.";
 
-        // Send the list to the user
+        // Envoyer la liste à l'utilisateur
         await reply(pluginList);
     } catch (error) {
-        console.error("Error:", error); // Log the error
-        reply("*Error: Unable to fetch plugins from the repository. Please try again later.*");
+        console.error("Erreur :", error); // Enregistrer l'erreur
+        reply("*Erreur : Impossible de récupérer les plugins depuis le dépôt. Veuillez réessayer plus tard.*");
     }
 });
 
-// Command to download a specific plugin
+// Commande pour télécharger un plugin spécifique
 cmd({
-    pattern: "plugin", // Command trigger
-    alias: ["downloadplugin", "getplugin"], // Aliases
-    use: '.plugin <plugin_name>', // Example usage
-    react: "⬇️", // Emoji reaction
-    desc: "Download a specific plugin from the bot's repository.", // Description
-    category: "utility", // Command category
-    filename: __filename // Current file name
+    pattern: "plugin", // Déclencheur de la commande
+    alias: ["downloadplugin", "getplugin"], // Alias
+    use: '.plugin <plugin_name>', // Exemple d'utilisation
+    react: "⬇️", // Réaction emoji
+    desc: "Télécharge un plugin spécifique depuis le dépôt du bot.", // Description
+    category: "utility", // Catégorie de la commande
+    filename: __filename // Nom du fichier actuel
 },
 
 async (conn, mek, m, { from, reply, args, senderNumber }) => {
     try {
-        let pluginName = args[0]; // Get the plugin name or number from the argument
+        let pluginName = args[0]; // Obtenir le nom ou le numéro du plugin à partir de l'argument
 
-        // If the user is replying to a message, check if it's a number
+        // Si l'utilisateur répond à un message, vérifier si c'est un numéro
         if (m.quoted && m.quoted.key.fromMe) {
             const quotedText = m.quoted.text;
-            if (/📂 \*KERM MD V1 Plugins:\*/i.test(quotedText)) {
-                // Extract the number from the reply
+            if (/📂 \DRACULA v1 Plugins:\*/i.test(quotedText)) {
+                // Extraire le numéro du fichier de la réponse
                 const fileNumber = parseInt(pluginName);
                 if (!isNaN(fileNumber) && fileNumber > 0 && fileNumber <= pluginListCache.length) {
                     pluginName = pluginListCache[fileNumber - 1].name;
@@ -81,56 +81,56 @@ async (conn, mek, m, { from, reply, args, senderNumber }) => {
             }
         }
 
-        // Check if the user provided a plugin name
+        // Vérifier si l'utilisateur a fourni un nom de plugin
         if (!pluginName) {
-            return reply("*Please provide a plugin name or number to download.*\nExample: `.plugin ytdl.js` or reply with `.plugin 1`");
+            return reply("Veuillez fournir un nom de plugin ou un numéro pour le télécharger.\nExemple : `.plugin ytdl.js` ou répondez avec `.plugin 1`");
         }
 
-        // Fetch the plugin file from GitHub
+        // Récupérer le fichier du plugin depuis GitHub
         const response = await axios.get(`${GITHUB_API_URL}/${pluginName}`);
-        const pluginUrl = response.data.download_url; // Get the download URL
+        const pluginUrl = response.data.download_url; // Obtenir l'URL de téléchargement
 
-        // Download the plugin file
+        // Télécharger le fichier du plugin
         const pluginResponse = await axios.get(pluginUrl, { responseType: 'arraybuffer' });
-        const pluginPath = `./${pluginName}`; // Save the file locally
+        const pluginPath = `./${pluginName}`; // Enregistrer le fichier localement
 
-        // Save the file to the local system
+        // Enregistrer le fichier sur le système local
         fs.writeFileSync(pluginPath, pluginResponse.data);
 
-        // Status message with image and caption
+        // Message de confirmation avec image et légende
         const statusMessage = {
-            image: { url: `https://i.ibb.co/5x444Mnp/mrfrankofc.jpg` }, // Replace with your image URL
-            caption: `*Successfully downloaded ${pluginName} ✅*`,
+            image: { url: `https://i.ibb.co/5x444Mnp/mrfrankofc.jpg` }, // Remplacez par votre URL d'image
+            caption: `Téléchargement réussi de ${pluginName} `,
             contextInfo: {
                 mentionedJid: [senderNumber],
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363321386877609@newsletter',
-                    newsletterName: '𝐊𝐄𝐑𝐌 𝐌𝐃',
+                    newsletterJid: '@newsletter',
+                    newsletterName: 'DRACULA',
                     serverMessageId: 143
                 }
             }
         };
 
-        // Send the file to the user
+        // Envoyer le fichier à l'utilisateur
         await conn.sendMessage(
             from,
             {
                 document: fs.readFileSync(pluginPath),
-                mimetype: 'application/javascript', // MIME type for JS files
+                mimetype: 'application/javascript', // Type MIME pour les fichiers JS
                 fileName: pluginName
             },
             { quoted: mek }
         );
 
-        // Send the status message
+        // Envoyer le message de confirmation
         await conn.sendMessage(from, statusMessage, { quoted: mek });
 
-        // Delete the local file after sending
+        // Supprimer le fichier local après envoi
         fs.unlinkSync(pluginPath);
     } catch (error) {
-        console.error("Error:", error); // Log the error
-        reply("*Error: Unable to download the plugin. Please check the plugin name or try again later.*");
+        console.error("Erreur :", error); // Enregistrer l'erreur
+        reply("Erreur : Impossible de télécharger le plugin. Vérifiez le nom du plugin ou réessayez plus tard.");
     }
 });
