@@ -1,16 +1,3 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const { cmd } = require('../command');
 const config = require('../config');
 
@@ -18,7 +5,7 @@ cmd({
     pattern: "settings",
     react: "🎛️",
     alias: ["setting", "env"],
-    desc: "Get bot's settings list.",
+    desc: "Obtenez la liste des paramètres du bot.",
     category: "main",
     use: '.settings',
     filename: __filename
@@ -46,35 +33,35 @@ cmd({
     reply
 }) => {
     try {
-        // Function to return ✅ or ❌ based on the boolean value, considering multiple formats
+        // Fonction qui renvoie ✅ ou ❌ en fonction de la valeur booléenne, en considérant plusieurs formats
         const statusIcon = (status) => {
             return (status === true || status === 'true' || status === 1) ? "✅" : "❌";
         };
 
-        // Create the settings message with the updated format
-        let madeSetting = `╭───⚙️ *${config.BOT_NAME} Settings* ⚙️───╮
+        // Création du message de paramètres avec le format mis à jour
+        let madeSetting = `╭───⚙️ *Paramètres de ${config.BOT_NAME}* ⚙️───╮
 │
-│ 🟢 *➤ Auto Read Status*: ${statusIcon(config.AUTO_READ_STATUS)}
+│ 🟢 *➤ Statut de lecture automatique*: ${statusIcon(config.AUTO_READ_STATUS)}
 │ ⚙️ *➤ Mode*: *${config.MODE}*
-│ 🎙️ *➤ Auto Voice*: ${statusIcon(config.AUTO_VOICE)}
-│ 🖼️ *➤ Auto Sticker*: ${statusIcon(config.AUTO_STICKER)}
-│ 💬 *➤ Auto Reply*: ${statusIcon(config.AUTO_REPLY)}
-│ ✉️ *➤ Alive Message*: *${config.ALIVE_MSG}*
-│ 🔗 *➤ Anti Link*: ${statusIcon(config.ANTI_LINK)}
-│ 🚫 *➤ Anti Bad*: ${statusIcon(config.ANTI_BAD)}
-│ ⌨️ *➤ Prefix*: *[ ${config.PREFIX} ]*
-│ 🎥 *➤ Fake Recording*: ${statusIcon(config.FAKE_RECORDING)}
-│ 😀 *➤ Auto React*: ${statusIcon(config.AUTO_REACT)}
-│ ❤️ *➤ Heart React*: ${statusIcon(config.HEART_REACT)}
-│ 👑 *➤ Owner React*: ${statusIcon(config.OWNER_REACT)}
-│ 🤖 *➤ Bot Name*: *${config.BOT_NAME}*
+│ 🎙️ *➤ Voix automatique*: ${statusIcon(config.AUTO_VOICE)}
+│ 🖼️ *➤ Sticker automatique*: ${statusIcon(config.AUTO_STICKER)}
+│ 💬 *➤ Réponse automatique*: ${statusIcon(config.AUTO_REPLY)}
+│ ✉️ *➤ Message d'activité*: *${config.ALIVE_MSG}*
+│ 🔗 *➤ Anti-lien*: ${statusIcon(config.ANTI_LINK)}
+│ 🚫 *➤ Anti-mauvais*: ${statusIcon(config.ANTI_BAD)}
+│ ⌨️ *➤ Préfixe*: *[ ${config.PREFIX} ]*
+│ 🎥 *➤ Enregistrement factice*: ${statusIcon(config.FAKE_RECORDING)}
+│ 😀 *➤ Réaction automatique*: ${statusIcon(config.AUTO_REACT)}
+│ ❤️ *➤ Réaction en cœur*: ${statusIcon(config.HEART_REACT)}
+│ 👑 *➤ Réaction du propriétaire*: ${statusIcon(config.OWNER_REACT)}
+│ 🤖 *➤ Nom du bot*: *${config.BOT_NAME}*
 │
 ╰──────────────────────────╯
 
-*🌟Developed by KERM-MD-V1🌟*
+DRACULA»🌐
 `;
 
-        // Send the settings message with the updated format
+        // Envoi du message de paramètres avec le format mis à jour
         await conn.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: madeSetting
