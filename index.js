@@ -1,5 +1,3 @@
-
-
 const {
 default: makeWASocket,
 useMultiFileAuthState,
