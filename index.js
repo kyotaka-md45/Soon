@@ -79,7 +79,7 @@ console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
 console.log('DRACULA-V1 CONNECTED TO WHATSAPP ENJOY ✅')
 
 let up = `╭──────────────●●►
-➺Pharouk_MD-v1 connecté avec succès. Tape .menu pour voir la liste des commandes. Créé par Pharouk ✅
+DRACULA-v1 connecté avec succès. Tape .menu pour voir la liste des commandes. Créé par Pharouk 
 
  Rejoins notre canal WhatsApp pour rester à jour avec DRACULA-v1 
 
@@ -90,10 +90,10 @@ Reste connecté, l'aventure ne fait que commencer !
 contact moi 
 
 ╭⊱✫🧛 DRACULA 🧛✫⊱╮
-│✫➠ - 📂REPOSITORY NAME:* DRACULA
-│✫➠ - 📃DESCRIPTION: CHIC BOT»🧋
-│✫➠ - 🛡️OWNER: PHAROUK 
-│✫➠ - 🌐BOT MESSAGE : THANK YOU 
+│✫➠  REPOSITORY NAME: DRACULA
+│✫➠ DESCRIPTION: CHIC BOT»🧋
+│✫➠  OWNER: PHAROUK 
+│✫➠ -BOT MESSAGE : THANK YOU 
 
 TON BOT ACTIVE🟢\n\n*PREFIX: ${prefix}
 
