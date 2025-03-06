@@ -91,10 +91,10 @@ Description : CHIC BOT WHATSAPP
 
 Propriétaire : Pharouk »🧋
 
-*TON BOT EST ACTIVÉ ✨♥️🪄*\n\n*PREFIX: ${prefix}*
+TON BOT EST ACTIVÉ 🟠⚪🟢\n\n*PREFIX: ${prefix}
 
 *╰──────────────●●►*`;
-conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/j9wH2hpj/lordkerm.jpg` }, caption: up })
+conn.sendMessage(conn.user.id, { image: { url: 'https://i.imgur.com/4wbsESg.png` }, caption: up })
 
 }
 })
@@ -106,7 +106,7 @@ conn.ev.on('messages.upsert', async(mek) => {
 mek = mek.messages[0]
 if (!mek.message) return	
 mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "false"){
+if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
 await conn.readMessages([mek.key])
 }
 const m = sms(conn, mek)
