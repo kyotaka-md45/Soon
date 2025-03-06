@@ -7,7 +7,7 @@ const axios = require('axios');
 cmd(
   {
     pattern: 'menu',
-    react: '📑',
+    react: '',
     desc: 'Affiche la liste des commandes du bot.',
     category: 'main',
     use: '.menu',
@@ -45,85 +45,53 @@ cmd(
   ) => {
     try {
       let menu = `╭━━━⋆⋅⋆━━━╮
-      *📜 ${config.BOT_NAME} - MENU 📜*
-      ───────────────
-      ✅ *Statut :* En ligne ✅
-      ⏳ *Uptime :* ${runtime(process.uptime())}
-      🚀 *Mode :* ${config.MODE}
-      ⚡ *Préfixe :* ${config.PREFIX}
-      💾 *RAM :* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
+ ${config.BOT_NAME} - MENU 
+───────────────
+ Sᴛᴀᴛᴜs: En ligne 
+⏳ Uᴘᴛɪᴍᴇ: ${runtime(process.uptime())}
+🚀 Mᴏᴅᴇ: ${config.MODE}
+⚡ Pʀᴇғɪxᴇ: ${config.PREFIX}
+💾 *Rᴀᴍ:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
         2
       )}MB / ${Math.round(os.totalmem() / 1024 / 1024)}MB
-      🤖 *Version :* 4.2.1
-      👑 *Créateur :* Kɢ Tᴇᴄʜ
-      ───────────────
-      🎭 *Commandes disponibles* 🎭
+🤖 Vᴇʀsɪᴏɴ: 1.0.0
+👑 Cʀᴇᴀᴛᴏʀ: Pʜᴀʀᴏᴜᴋ
+───────────────
+🎭 *Cᴏᴍᴍᴀɴᴅᴇs Dɪsᴘᴏɴɪʙʟᴇs* 🎭
 
-      📥 *Téléchargement* :
-        - .fb  
-        - .insta  
-        - .video  
-        - .play  
-        - .song  
-        - .spotify  
-      
-      🔎 *Recherche* :
-        - .google  
-        - .yts  
-        - .movie  
-        - .lyrics  
+📥 Tᴇ́ʟᴇᴄʜᴀʀɢᴇᴍᴇɴᴛ: 
+  ➤ .sᴇɴᴅɪᴍᴀɢᴇ  
 
-      🎮 *Jeux* :
-        - .numbergame  
-        - .roll  
-        - .coinflip  
-        - .pick  
+🔎 Rᴇᴄʜᴇʀᴄʜᴇ:
+  ➤ .ғɪɴᴅɴᴀᴍᴇ  
+  ➤ .ʟʏʀɪᴄs  
+  ➤ .ᴛʀᴀɴsʟᴀᴛᴏʀ  
+  ➤ .ᴡᴇᴀᴛʜᴇʀ  
 
-      🔞 *NSFW* :
-        - .nsfw  
-        - .penis  
-        - .nude  
-        - .sex  
-        - .kiss  
+🎮 Jᴇᴜx:  
+  ➤ .ᴀᴄᴛɪᴏɴ-ᴠᴇʀɪᴛᴇ  
+  ➤ .ᴘɪɴɢ  
+  ➤ .ʀᴀɴᴋ  
 
-      🧠 *IA* :
-        - .gpt  
-        - .ai  
-        - .analyse  
-        - .llama3  
+👨‍💻 Aᴅᴍɪɴ:
+  ➤ .ᴄᴍᴅᴜᴘᴅᴀᴛᴇ  
+  ➤ .ᴜᴘᴅᴀᴛᴇ  
+  ➤ .sᴇᴛᴛɪɴɢ  
 
-      👨‍💻 *Admin* :
-        - .updatecmd  
-        - .settings  
-        - .owner  
-        - .repo  
-        - .status  
+👥 Gʀᴏᴜᴘᴇ: 
+  ➤ .ᴋɪᴄᴋᴀʟʟ  
 
-      👥 *Groupe* :
-        - .kick  
-        - .promote  
-        - .demote  
-        - .tagall  
-        - .invite  
+📃 Iɴғᴏs:  
+  ➤ .sʏsᴛᴇᴍ  
 
-      📃 *Infos* :
-        - .about  
-        - .dev  
-        - .botinfo  
-        - .ping  
-
-      🖼️ *Images* :
-        - .img  
-        - .logo  
-        - .wallpaper  
-
-      💡 *Autres* :
-        - .fact  
-        - .joke  
-        - .qr  
-        - .timezone  
-        - .quote  
-      ╰━━━━━━━━━━━━╯`;
+💡 Aᴜᴛʀᴇs:  
+  ➤ .ᴀʟɪᴠᴇ  
+  ➤ .ᴇᴠᴀʟ  
+  ➤ .ᴅᴇʟ  
+  ➤ .ᴀɴᴛɪ-ᴠɪᴇᴡ-ᴏɴᴄᴇ  
+  ➤ .ʀᴇsᴛᴀʀᴛ  
+  ➤ .ᴄᴏᴜɴᴛʀʏ-ᴄᴏᴅᴇ  
+╰━━━━━━━━━━━━╯`;
 
       await conn.sendMessage(
         from,
@@ -134,5 +102,5 @@ cmd(
       console.log(e);
       reply(`${e}`);
     }
-  } 
+  }
 );
