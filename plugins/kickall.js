@@ -1,26 +1,13 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const config = require('../config');
 const { cmd, commands } = require('../command');
 
-let stopKickall = false; // Variable to stop the execution of the kickall command
+let stopKickall = false; // Variable pour arrêter l'exécution de la commande kickall
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 cmd({
     pattern: "kickall",
-    desc: "Kicks all non-admin members from the group.",
+    desc: "Expulse tous les membres non-admin du groupe.",
     react: "🧨",
     category: "group",
     filename: __filename,
@@ -39,70 +26,70 @@ cmd({
     reply
 }) => {
     try {
-        // Check if the command is used in a group
-        if (!isGroup) return reply(`❌ This command can only be used in groups.`);
+        // Vérifie que la commande est utilisée dans un groupe
+        if (!isGroup) return reply(`❌ Cette commande ne peut être utilisée que dans des groupes.`);
 
-        // Check if the user is an admin
-        if (!isAdmins) return reply(`❌ Only group admins can use this command.`);
+        // Vérifie que l'utilisateur est admin
+        if (!isAdmins) return reply(`❌ Seuls les admins du groupe peuvent utiliser cette commande.`);
 
-        // Check if the bot has admin privileges
-        if (!isBotAdmins) return reply(`❌ I need admin privileges to remove group members.`);
+        // Vérifie que le bot a les privilèges d'admin
+        if (!isBotAdmins) return reply(`❌ J'ai besoin des privilèges d'admin pour retirer des membres du groupe.`);
 
-        stopKickall = false; // Reset the stop flag
+        stopKickall = false; // Réinitialise le drapeau d'arrêt
 
-        // Send warning message before execution
-        reply(`⚠️ *Warning!* All non-admin members will be removed in *5 seconds*.\nTo cancel this operation, type *.stop*.`);
+        // Envoie un message d'avertissement avant l'exécution
+        reply(`⚠️ *Attention !* Tous les membres non-admin seront expulsés dans *5 secondes*.\nPour annuler cette opération, tapez *.stop*.`);
         
-        // Countdown before execution with a chance to cancel
+        // Compte à rebours avant l'exécution avec possibilité d'annuler
         for (let i = 5; i > 0; i--) {
             if (stopKickall) {
-                return reply(`✅ *Operation canceled.* No members were removed.`);
+                return reply(`✅ *Opération annulée.* Aucun membre n'a été expulsé.`);
             }
-            await delay(1000); // Wait for 1 second
+            await delay(1000); // Attendre 1 seconde
         }
 
-        // Filter out non-admin members
+        // Filtre des membres non-admin
         const allParticipants = groupMetadata.participants;
         const nonAdminParticipants = allParticipants.filter(member => 
             !groupAdmins.includes(member.id) && member.id !== conn.user.jid
         );
 
         if (nonAdminParticipants.length === 0) {
-            return reply(`✅ There are no non-admin members to remove.`);
+            return reply(`✅ Aucun membre non-admin à expulser.`);
         }
 
-        // Remove non-admin members
+        // Expulse les membres non-admin
         for (let participant of nonAdminParticipants) {
             if (stopKickall) {
-                return reply(`✅ *Operation canceled.* Some members may not have been removed.`);
+                return reply(`✅ *Opération annulée.* Certains membres n'ont peut-être pas été expulsés.`);
             }
             await conn.groupParticipantsUpdate(from, [participant.id], "remove")
-                .catch(err => console.error(`⚠️ Failed to remove ${participant.id}:`, err));
+                .catch(err => console.error(`⚠️ Échec de l'expulsion de ${participant.id} :`, err));
         }
 
-        // Send success confirmation
-        reply(`✅ *Success!* All non-admin members have been removed from the group.`);
+        // Envoie une confirmation de succès
+        reply(`✅ *Succès !* Tous les membres non-admin ont été expulsés du groupe.`);
     } catch (e) {
-        console.error('Error while executing kickall:', e);
-        reply('❌ An error occurred while executing the command.');
+        console.error('Erreur lors de l\'exécution de kickall :', e);
+        reply('❌ Une erreur est survenue lors de l\'exécution de la commande.');
     }
 });
 
-// Command to stop kickall execution
+// Commande pour arrêter l'exécution de kickall
 cmd({
     pattern: "stop",
-    desc: "Stops the kickall command.",
+    desc: "Arrête la commande kickall.",
     react: "⏹️",
     category: "group",
     filename: __filename,
 }, async (conn, mek, m, { reply }) => {
-    stopKickall = true; // Set the stop flag to true
-    reply(`✅ *Kickall operation has been canceled.*`);
+    stopKickall = true; // Active le drapeau d'arrêt
+    reply(`✅ *Opération kickall annulée.*`);
 });
 
 cmd({
     pattern: "kick",
-    desc: "Removes a participant by replying to or mentioning their message.",
+    desc: "Expulse un participant en répondant ou en mentionnant son message.",
     react: "🚪",
     category: "group",
     filename: __filename,
@@ -119,43 +106,43 @@ cmd({
     reply
 }) => {
     try {
-        // Check if the command is used in a group
-        if (!isGroup) return reply(`❌ This command can only be used in groups.`);
+        // Vérifie que la commande est utilisée dans un groupe
+        if (!isGroup) return reply(`❌ Cette commande ne peut être utilisée que dans des groupes.`);
         
-        // Only admins or the owner can use this command
-        if (!isAdmins && !isOwner) return reply(`❌ Only group admins or the owner can use this command.`);
+        // Seuls les admins ou le propriétaire peuvent utiliser cette commande
+        if (!isAdmins && !isOwner) return reply(`❌ Seuls les admins du groupe ou le propriétaire peuvent utiliser cette commande.`);
         
-        // Check if the bot has admin privileges
-        if (!isBotAdmins) return reply(`❌ I need admin privileges to remove group members.`);
+        // Vérifie que le bot a les privilèges d'admin
+        if (!isBotAdmins) return reply(`❌ J'ai besoin des privilèges d'admin pour retirer des membres du groupe.`);
         
-        // Retrieve the target participant via a reply or a mention
+        // Récupère le participant ciblé via une réponse ou une mention
         let target;
         if (quoted) {
-            target = quoted.sender; // Use the sender of the quoted message
+            target = quoted.sender; // Utilise l'expéditeur du message cité
         } else if (mek.message && mek.message.mentionedJid && mek.message.mentionedJid.length > 0) {
-            target = mek.message.mentionedJid[0]; // Use the first mentioned ID
+            target = mek.message.mentionedJid[0]; // Utilise le premier identifiant mentionné
         }
         
         if (!target) {
-            return reply(`❌ Please mention or reply to the message of the participant to remove.`);
+            return reply(`❌ Veuillez mentionner ou répondre au message du participant à expulser.`);
         }
         
-        // Prevent kicking an admin or the bot itself
+        // Empêche d'expulser un admin ou le bot lui-même
         if (groupAdmins.includes(target) || target === conn.user.jid) {
-            return reply(`❌ You cannot remove an admin or the bot.`);
+            return reply(`❌ Vous ne pouvez pas expulser un admin ou le bot.`);
         }
         
-        // Remove the participant from the group
+        // Expulse le participant du groupe
         await conn.groupParticipantsUpdate(from, [target], "remove")
             .catch(err => {
-                console.error(`⚠️ Failed to remove ${target}:`, err);
-                return reply(`❌ An error occurred while trying to remove the participant.`);
+                console.error(`⚠️ Échec de l'expulsion de ${target} :`, err);
+                return reply(`❌ Une erreur est survenue lors de la tentative d'expulsion du participant.`);
             });
         
-        // Send a confirmation message upon successful removal
-        reply(`✅ Success! The participant has been removed from the group.`);
+        // Envoie un message de confirmation en cas de succès
+        reply(`✅ Succès ! Le participant a été expulsé du groupe.`);
     } catch (e) {
-        console.error('Error while executing kick:', e);
-        reply('❌ An error occurred while executing the command.');
+        console.error('Erreur lors de l\'exécution de kick :', e);
+        reply('❌ Une erreur est survenue lors de l\'exécution de la commande.');
     }
 });
