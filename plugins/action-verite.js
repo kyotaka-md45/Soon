@@ -1,16 +1,3 @@
-/*
-_  ______   _____ _____ _____ _   _
-| |/ / ___| |_   _| ____/___ | | | |
-| ' / |  _    | | |  _|| |   | |_| |
-| . \ |_| |   | | | |__| |___|  _  |
-|_|\_\____|   |_| |_____\____|_| |_|
-
-ANYWAY, YOU MUST GIVE CREDIT TO MY CODE WHEN COPY IT
-CONTACT ME HERE +237656520674
-YT: KermHackTools
-Github: Kgtech-cmr
-*/
-
 const { cmd } = require("../command");
 
 // Liste des questions pour la commande vérité
@@ -212,7 +199,7 @@ cmd({
     pattern: "action",
     desc: "Fais une action aléatoire.",
     category: "fun",
-    react: "🤪",
+    react: "🫠",
     filename: __filename
 }, async (conn, mek, m, { reply }) => {
     try {
