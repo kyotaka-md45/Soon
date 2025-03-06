@@ -1,43 +1,34 @@
-/*created by Kgtech 🕵
-contact dev1 237656520674 ♻️
-contact dev2 237650564445 ♻️
-© Copy coder alert ⚠
-*/
-
-
-
-
-
 const config = require('../config')
-const {cmd , commands} = require('../command')
+const { cmd, commands } = require('../command')
 const os = require("os")
-const {runtime} = require('../lib/functions')
+const { runtime } = require('../lib/functions')
+
 cmd({
     pattern: "system",
     react: "♠️",
-    alias: ["uptime" ,"runtime"],
-    desc: "cheack uptime",
+    alias: ["uptime", "runtime"],
+    desc: "Vérifie le temps d'activité",
     category: "main",
     filename: __filename
 },
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-let status = `*╭──────────●●►*
-*KERM-MD-V1 UPTIME LIST↷*
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        let status = `*╭──────────●●►*
+*LISTE DE TEMPS D'ACTIVITÉ DE KERM-MD-V1 ↷*
 
-*_UPTIME:➠_*  ${runtime(process.uptime())}
+*_TEMPS D'ACTIVITÉ :➠_*  ${runtime(process.uptime())}
 
-*_RAM USAGE:➠_* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+*_UTILISATION DE LA RAM :➠_* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
 
-*_HOSTNAME:➠_* ${os.hostname()}
+*_NOM DE L'HÔTE :➠_* ${os.hostname()}
 
-*_OWNER:➠_* *KG TECH*
+*_PROPRIÉTAIRE :➠_* *DRACULA 🧛*
 *╰──────────●●►*
 `
-await conn.sendMessage(from,{image:{url:config.ALIVE_IMG},caption:`${status}`},{quoted:mek})
+        await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: `${status}` }, { quoted: mek })
 
-}catch(e){
-console.log(e)
-reply(`${e}`)
-}
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
 })
