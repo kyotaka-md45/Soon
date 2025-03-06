@@ -1,50 +1,71 @@
 // Importation des modules nécessaires
 const config = require('../config');
 const { cmd } = require('../command');
-const { runtime } = require('../lib/functions');
+const { runtime, getRam, getDate, getPlatform, textToStylist, addSpace } = require('../lib/functions');
 
-// Définition de la commande "menu"
 cmd(
   {
-    pattern: 'menu',
+    pattern: 'menu ?(.*)',
     react: '📑',
     desc: 'Affiche la liste des commandes du bot.',
     category: 'principal',
     use: '.menu',
     filename: __filename,
+    dontAddCommandList: true,
   },
-  async (conn, mek, m, { from, reply }) => {
+  async (conn, mek, m, { from, reply, ctx }) => {
     try {
-      let menu = `╭─❖ 「 *${config.BOT_NAME}* 」 ❖─
+      const commands = {};
+
+      ctx.commands.forEach((command) => {
+        if (!command.dontAddCommandList && command.pattern !== undefined) {
+          let cmdType = command.category ? command.category.toLowerCase() : 'autres';
+          if (!commands[cmdType]) commands[cmdType] = [];
+
+          let isDisabled = command.active === false;
+          let cmd = command.name.trim();
+          commands[cmdType].push(isDisabled ? `${cmd} [désactivé]` : cmd);
+        }
+      });
+
+      const sortedCommandKeys = Object.keys(commands).sort();
+      const [date, time] = getDate();
+
+      let msg = `╭──❖ 「 *${config.BOT_NAME}* 」 ❖──
 │ 📌 *Statut du bot*
 │ ├⏳ *Uptime* : ${runtime(process.uptime())}
 │ ├⚙️ *Mode* : ${config.MODE}
 │ ├📌 *Préfixe* : ${config.PREFIX}
-│ ├📊 *Mémoire utilisée* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB
+│ ├📊 *Mémoire utilisée* : ${getRam()}
 │ ├🤖 *Version* : 1.0.0
-│ ├👤 *Créateur* : Pharouk 
+│ ├👤 *Créateur* : Pharouk
 │ ├🔄 *Toujours en ligne* : ${config.ALWAYS_ONLINE}
-╰──────────◇
+╰───────────────────◇\n\n`;
 
-📌 *Commandes disponibles :*
-🎵 *Téléchargement* : .fb, .insta, .video, .play, .song...
-🔎 *Recherche* : .google, .weather, .ytsearch, .movie...
-🎮 *Jeux* : .numbergame, .roll, .coinflip...
-🤖 *AI* : .gpt, .ai, .analyse...
-🛠️ *Outils* : .sticker, .tts, .convert...
-📜 *Infos* : .botinfo, .status, .ping...
-👥 *Groupe* : .add, .kick, .promote, .demote...
-👑 *Admin* : .settings, .shutdown, .broadcast...
+      if (m.args && commands[m.args]) {
+        msg += ` ╭─❏ ${textToStylist(m.args.toLowerCase(), 'smallcaps')} ❏\n`;
+        commands[m.args]
+          .sort((a, b) => a.localeCompare(b))
+          .forEach((plugin) => {
+            msg += ` │ ${textToStylist(plugin.toUpperCase(), 'mono')}\n`;
+          });
+        msg += ` ╰─────────────────`;
+        return await conn.sendMessage(from, { text: msg }, { quoted: mek });
+      }
 
-📌 Tape *.menu <catégorie>* pour plus de détails !`;
+      for (const command of sortedCommandKeys) {
+        msg += ` ╭─❏ ${textToStylist(command.toLowerCase(), 'smallcaps')} ❏\n`;
+        commands[command]
+          .sort((a, b) => a.localeCompare(b))
+          .forEach((plugin) => {
+            msg += ` │ ${textToStylist(plugin.toUpperCase(), 'mono')}\n`;
+          });
+        msg += ` ╰─────────────────\n`;
+      }
 
-      await conn.sendMessage(
-        from,
-        { image: { url: config.ALIVE_IMG }, caption: menu },
-        { quoted: mek }
-      );
+      await conn.sendMessage(from, { text: msg.trim() }, { quoted: mek });
     } catch (e) {
-      console.log(e);
+      console.error(e);
       reply(`${e}`);
     }
   }
