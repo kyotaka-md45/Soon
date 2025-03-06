@@ -1,8 +1,3 @@
-
-
-
-
-
 const axios = require('axios');
 const { cmd } = require('../command');
 
@@ -51,7 +46,7 @@ cmd({
         }
 
         // Send the lyrics back to the chat
-        reply(`> 🍓KERM LYRICS RESULT🍓\n\nTitle🎧 *${title}*\nArtist🗣️ *${artist}*\n\n${lyrics}`);
+        reply(`> 🧛 DRACULA RESULT🧛\n\nTitle🎧 *${title}*\nArtist🗣️ *${artist}*\n\n${lyrics}`);
     } catch (error) {
         console.error("Error fetching lyrics:", error.message);
 
@@ -114,7 +109,7 @@ cmd({
 
         // Send message with lyrics and buttons
         const buttonMessage = {
-            text: `> 🍓KERM LYRICS RESULT🍓\n\nTitle🎧 *${title}*\nArtist🗣️ *${artist}*\n\n${lyrics}`,
+            text: `> 🧛DRACULA LYRICS RESULT🧛\n\nTitle🎧 *${title}*\nArtist🗣️ *${artist}*\n\n${lyrics}`,
             footer: 'Lyrics provided by lyrics.ovh',
             buttons: buttons,
             headerType: 1
