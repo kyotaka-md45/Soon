@@ -94,7 +94,7 @@ Propriétaire : Pharouk »🧋
 TON BOT EST ACTIVÉ 🟠⚪🟢\n\n*PREFIX: ${prefix}
 
 *╰──────────────●●►*`;
-conn.sendMessage(conn.user.id, { image: { url: 'https://i.imgur.com/4wbsESg.png` }, caption: up })
+conn.sendMessage(conn.user.id, { image: { url: 'https://i.ibb.co/938481dt/lordkerm.jpg` }, caption: up })
 
 }
 })
